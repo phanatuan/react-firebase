@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-import { AuthUserContext } from '../Session';
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
@@ -24,12 +25,9 @@ const NavigationAuth = ({ authUser }) => (
     <li>
       <Link to={ROUTES.ACCOUNT}>Account</Link>
     </li>
-    <li>
-      <Link to={ROUTES.PASSWORD_CHANGE}>Change Password</Link>
-    </li>
-    {authUser.includes(ROLES.ADMIN) && (
+    {authUser.roles.includes(ROLES.ADMIN) && (
       <li>
-        <Link to={ROUTES.ADMIN}>Admin Area</Link>
+        <Link to={ROUTES.ADMIN}>Admin</Link>
       </li>
     )}
     <li>
@@ -45,9 +43,6 @@ const NavigationNonAuth = () => (
     </li>
     <li>
       <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.PASSWORD_FORGET}>Forget Password</Link>
     </li>
   </ul>
 );

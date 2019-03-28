@@ -33,13 +33,13 @@ class SignInFormBase extends React.Component {
   }
 
   onSubmit = e => {
-    console.log('Signing in');
     e.preventDefault();
     let { email, password } = this.state;
 
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(authUser => {
+        console.log(authUser);
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.LANDING);
       })
